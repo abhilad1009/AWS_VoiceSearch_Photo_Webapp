@@ -19,6 +19,7 @@ def get_awsauth(region, service):
 
 def lambda_handler(event, context):
 
+    print("Lambda Index Photos")
     print("event:",event)
 
     s3_metadata = event['Records'][0]['s3']
