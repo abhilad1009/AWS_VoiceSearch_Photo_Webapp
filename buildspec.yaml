@@ -21,3 +21,8 @@ phases:
       - aws lambda update-function-code --function-name index-photos --zip-file fileb://deployment_package.zip
       - aws lambda update-function-code --function-name search-photos --zip-file fileb://deployment_package1.zip
       - echo "DONE!!"
+artifacts:
+  files:
+    - '**/*'
+  name: lambdabuiltartifact
+  discard-paths: no
