@@ -13,8 +13,8 @@ phases:
       - zip -r9 ../deployment_package.zip .
       - zip -r9 ../deployment_package1.zip .
       - cd ..
-      - zip -g deployment_package.zip search-photos.py
-      - zip -g deployment_package1.zip index-photos.py
+      - zip -g deployment_package.zip LF1.py
+      - zip -g deployment_package1.zip LF2.py
   post_build:
     commands:
       - echo "Updating lambda Function..."
