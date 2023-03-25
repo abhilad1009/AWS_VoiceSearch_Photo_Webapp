@@ -1,0 +1,16 @@
+version: 0.0
+Resources:
+  - myLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: "index-images"
+        Alias: "default"
+        CurrentVersion: "1"
+        TargetVersion: "2"
+  - myLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: "search-images"
+        Alias: "default"
+        CurrentVersion: "1"
+        TargetVersion: "2"
