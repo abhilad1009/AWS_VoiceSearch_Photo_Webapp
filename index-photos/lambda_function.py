@@ -7,6 +7,7 @@ import time
 import requests
 from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
+from pattern.en import singularize
 
 
 def get_awsauth(region, service):
@@ -40,7 +41,10 @@ def lambda_handler(event, context):
     labels = []
 
     for i in range(len(labels_resp['Labels'])):
-        labels.append(labels_resp['Labels'][i]['Name'])
+        try:
+            labels.append(singularize(labels_resp['Labels'][i]['Name'].lower()))
+        except:
+            labels.append(labels_resp['Labels'][i]['Name'].lower())
 
     s3 = boto3.client('s3')
     img_s3_data = s3.head_object(Bucket=s3_bucket, Key=s3_key)
@@ -52,7 +56,10 @@ def lambda_handler(event, context):
         customlabels = list(map(lambda x: x.lower(), customlabels))
         for cl in customlabels:
             print(cl)
-            cl = cl.lower().strip()
+            try:
+                cl = singularize(cl.lower().strip())
+            except:
+                cl = cl.lower().strip()
             if cl not in label_names:
                 labels.append(cl)
 

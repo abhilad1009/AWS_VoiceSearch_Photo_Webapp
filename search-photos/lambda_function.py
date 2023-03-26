@@ -1,10 +1,10 @@
 import json
 import boto3
 # import requests
-from botocore.vendored import requests
+# from botocore.vendored import requests
 from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
-
+from pattern.en import singularize
 
 def get_awsauth(region, service):
     cred = boto3.Session().get_credentials()
@@ -31,9 +31,15 @@ def lambda_handler(event, context):
     lex_response = response['sessionState']['intent']
     keys = []
     if "key1" in lex_response["slots"] and lex_response["slots"]["key1"] != None:
-        keys.append(lex_response["slots"]["key1"]['value']['interpretedValue'])
+        try:
+            keys.append(singularize(lex_response["slots"]["key1"]['value']['interpretedValue'].lower()))
+        except:
+            keys.append(lex_response["slots"]["key1"]['value']['interpretedValue'].lower())
     if "key2" in lex_response["slots"] and lex_response["slots"]["key2"] != None:
-        keys.append(lex_response["slots"]["key2"]['value']['interpretedValue'])
+        try:
+            keys.append(singularize(lex_response["slots"]["key2"]['value']['interpretedValue'].lower()))
+        except:
+            keys.append(lex_response["slots"]["key2"]['value']['interpretedValue'].lower())
 
     print(keys)
 
@@ -49,17 +55,17 @@ def lambda_handler(event, context):
         verify_certs=True,
         connection_class=RequestsHttpConnection)
 
-    results = []
+    results = set()
     for k in keys:
 
         q = {'size': 100, 'query': {'multi_match': {'query': k}}}
         res = client.search(index=INDEX, body=q)
         hits = res['hits']['hits']
         for hit in hits:
-            results.append(hit['_source']['objectKey'])
+            results.add(hit['_source']['objectKey'])
 
     return {
         'statusCode': 200,
         'headers': {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "*", "Access-Control-Allow-Headers": "*"},
-        'body': json.dumps({"files": results})
+        'body': json.dumps({"files": list(results)})
     }
