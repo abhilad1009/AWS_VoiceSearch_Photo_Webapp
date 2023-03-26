@@ -4,7 +4,7 @@ import boto3
 # from botocore.vendored import requests
 from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
-from pattern.en import singularize
+from nltk.stem.porter import *
 
 def get_awsauth(region, service):
     cred = boto3.Session().get_credentials()
@@ -30,14 +30,17 @@ def lambda_handler(event, context):
     print(response)
     lex_response = response['sessionState']['intent']
     keys = []
+
+    stemmer = PorterStemmer()
+
     if "key1" in lex_response["slots"] and lex_response["slots"]["key1"] != None:
         try:
-            keys.append(singularize(lex_response["slots"]["key1"]['value']['interpretedValue'].lower()))
+            keys.append(stemmer.stem(lex_response["slots"]["key1"]['value']['interpretedValue'].lower()))
         except:
             keys.append(lex_response["slots"]["key1"]['value']['interpretedValue'].lower())
     if "key2" in lex_response["slots"] and lex_response["slots"]["key2"] != None:
         try:
-            keys.append(singularize(lex_response["slots"]["key2"]['value']['interpretedValue'].lower()))
+            keys.append(stemmer.stem(lex_response["slots"]["key2"]['value']['interpretedValue'].lower()))
         except:
             keys.append(lex_response["slots"]["key2"]['value']['interpretedValue'].lower())
 

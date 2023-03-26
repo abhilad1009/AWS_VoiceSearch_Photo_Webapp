@@ -7,7 +7,7 @@ import time
 import requests
 from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
-from pattern.en import singularize
+from nltk.stem.porter import *
 
 
 def get_awsauth(region, service):
@@ -39,10 +39,12 @@ def lambda_handler(event, context):
     timestamp = time.time()
 
     labels = []
+    stemmer = PorterStemmer()
 
     for i in range(len(labels_resp['Labels'])):
         try:
-            labels.append(singularize(labels_resp['Labels'][i]['Name'].lower()))
+            labels.append(stemmer.stem(
+                labels_resp['Labels'][i]['Name'].lower()))
         except:
             labels.append(labels_resp['Labels'][i]['Name'].lower())
 
@@ -57,7 +59,7 @@ def lambda_handler(event, context):
         for cl in customlabels:
             print(cl)
             try:
-                cl = singularize(cl.lower().strip())
+                cl = stemmer.stem(cl.lower().strip())
             except:
                 cl = cl.lower().strip()
             if cl not in label_names:
