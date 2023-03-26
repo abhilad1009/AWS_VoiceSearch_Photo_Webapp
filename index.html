@@ -24,24 +24,25 @@
 	<script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
 	
 	
-	<header><h3>Photo Album Web Application</h3></h3>
+	<header><h3 style="margin: 1em 0 0.5em 0;line-height: 42px;text-transform: uppercase;text-shadow: 0 1px white, 0 2px #777;font-family: 'Ultra', sans-serif;  font-size: 24px;	color: #343434;	font-weight: normal;">Photo Album Web Application</h3></h3>
 	</head>
 	<body>
 	
 
-	<div id="query_section" style="background-color:#e0e0e0">
+	<div id="query_section" >
 	<label> Enter your search query or use the voice feature</label>
 	<br>
 	<input type="text" id="my_search_query">
-	<button id="start-voice" class="button-l" onclick="voiceToText()">
-	<i class="fa fa-microphone"></i> Start
+	<button id="start-voice" class="button-l" onclick="voiceToText()" style="background-color: white; color: black; border: 2px solid #4CAF50;border-radius: 8px;">
+	<i class="fa fa-microphone" ></i> Start
 	</button>
 	</div>
 
 	<br>
-	<input type="button" id="search_btn" value="Search" onclick="mySearch()">
+	<input type="button" id="search_btn" value="Search" onclick="mySearch()" style="background-color: white; color: black; border: 2px solid #431efc;border-radius: 8px;">
 	<br>
 	<br>
+	<hr>
 	<h4> Uploading New Photos</h4>
 	<label> Enter your labels </label>
 	<br>
@@ -57,7 +58,7 @@
 	<input id="uploaded_img" name="uploaded_img" type="file" accept="image/*" >
 	<br>
 	<br>
-	<input type="button" id="upload_btn" value="Upload" onclick="myUpload()">
+	<input type="button" id="upload_btn" value="Upload" style="background-color: #31b554; border-color: #0f6926;padding: 8px; color: white;border-radius: 8px; " onclick="myUpload()">
 	
 	<br>
 	<div id="disp_img">

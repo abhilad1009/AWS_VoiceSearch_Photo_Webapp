@@ -62,7 +62,7 @@ def lambda_handler(event, context):
                 cl = stemmer.stem(cl.lower().strip())
             except:
                 cl = cl.lower().strip()
-            if cl not in label_names:
+            if cl not in labels:
                 labels.append(cl)
 
     print(labels)
