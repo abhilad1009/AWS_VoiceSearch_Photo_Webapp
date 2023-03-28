@@ -78,8 +78,8 @@
 	
 		var curr_query = document.getElementById('my_search_query').value;
 		// var body = JSON.stringify({"curr_query":curr_query})
-		// { apiKey: "L7PJk5rKVA2aiZH2fhGXN2Fu3aaH1iSd6yaUPZmX" }
-		var myapigClient = apigClientFactory.newClient({ apiKey: "L7PJk5rKVA2aiZH2fhGXN2Fu3aaH1iSd6yaUPZmX" });
+		// { apiKey: "vmjiazet7z3sSjmZmLJol12yOsXJYDRv2lXrALvA" }
+		var myapigClient = apigClientFactory.newClient({ apiKey: "vmjiazet7z3sSjmZmLJol12yOsXJYDRv2lXrALvA" });
 		var params = {q:curr_query};
 		console.log(params);
 		myapigClient.searchGet(params,{},{}).then(function(res)
@@ -95,7 +95,7 @@
 				disp_img.innerHTML="";
 				for(let idx=0; idx<bot_res_len; idx++){
 					var curr_img = document.createElement("img");
-					curr_img.src="http://s3.amazonaws.com/photobalti3/"+bot_res[idx];
+					curr_img.src="http://s3.amazonaws.com/photobalti/"+bot_res[idx];
 					curr_img.style.height="300px";
 					curr_img.style.width="300px";
 					disp_img.appendChild(curr_img);
@@ -162,7 +162,7 @@
 				var body = encoded;
 				var params = {
 								'key': curr_file.name,
-								'bucket': 'photobalti3',
+								'bucket': 'photobalti',
 								'Content-Type': file_type,
 								'x-amz-meta-customLabels': inp_labels,
 								'Accept': 'image/*'
@@ -174,8 +174,8 @@
 				// }
 
 				// console.log(encoded);
-				// { apiKey: "L7PJk5rKVA2aiZH2fhGXN2Fu3aaH1iSd6yaUPZmX" }
-				var myapigClient = apigClientFactory.newClient({ apiKey: "L7PJk5rKVA2aiZH2fhGXN2Fu3aaH1iSd6yaUPZmX" });
+				// { apiKey: "vmjiazet7z3sSjmZmLJol12yOsXJYDRv2lXrALvA" }
+				var myapigClient = apigClientFactory.newClient({ apiKey: "vmjiazet7z3sSjmZmLJol12yOsXJYDRv2lXrALvA" });
 				myapigClient.uploadBucketKeyPut(params,body,{}).then(function(res){
 					console.log(res);
 				});
