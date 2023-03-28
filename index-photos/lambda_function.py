@@ -73,7 +73,7 @@ def lambda_handler(event, context):
                     'labels': labels}
 
     REGION = 'us-east-1'
-    HOST = "search-photos-zurqo2mqy4mfjloidzi62aoxsq.us-east-1.es.amazonaws.com"  # add host here
+    HOST = "search-photos-tyo2a2wcxqrw4ntex5gzhk5oya.us-east-1.es.amazonaws.com"  # add host here
     INDEX = "photos"  # add index
     client = OpenSearch(hosts=[{
         'host': HOST,

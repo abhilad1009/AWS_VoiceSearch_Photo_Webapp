@@ -22,8 +22,8 @@ def lambda_handler(event, context):
     client = boto3.client('lexv2-runtime')
     searchquery = event['queryStringParameters']['q']
 
-    response = client.recognize_text(botId='LCISKB6Q4C',
-                                     botAliasId='Q3BOF5V2X9',
+    response = client.recognize_text(botId='YW3ZEYEMOT',
+                                     botAliasId='NB14OMR44L',
                                      localeId='en_US',
                                      sessionId="test0",
                                      text=searchquery)
@@ -45,9 +45,9 @@ def lambda_handler(event, context):
             keys.append(lex_response["slots"]["key2"]['value']['interpretedValue'].lower())
 
     print(keys)
-
+# https://search-photos-tyo2a2wcxqrw4ntex5gzhk5oya.us-east-1.es.amazonaws.com/
     REGION = 'us-east-1'
-    HOST = "search-photos-zurqo2mqy4mfjloidzi62aoxsq.us-east-1.es.amazonaws.com"  # add host here
+    HOST = "search-photos-tyo2a2wcxqrw4ntex5gzhk5oya.us-east-1.es.amazonaws.com"  # add host here
     INDEX = "photos"  # add index
     client = OpenSearch(hosts=[{
         'host': HOST,
