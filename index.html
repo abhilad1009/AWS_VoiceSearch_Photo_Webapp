@@ -56,10 +56,16 @@
 	<label for="img">Choose image:</label>
 	<br>
 	<input id="uploaded_img" name="uploaded_img" type="file" accept="image/*" >
+	
+	
 	<br>
 	<br>
 	<input type="button" id="upload_btn" value="Upload" style="background-color: #31b554; border-color: #0f6926;padding: 8px; color: white;border-radius: 8px; " onclick="myUpload()">
-	
+	<br>
+	<br>
+	<div id="upload_status" hidden="hidden">
+	Upload Status:
+	</div>
 	<br>
 	<div id="disp_img">
 	
@@ -85,7 +91,8 @@
 			// console.log(json_data)
 			if(bot_res_len>0){
 
-				disp_img = document.getElementById('disp_img')
+				disp_img = document.getElementById('disp_img');
+				disp_img.innerHTML="";
 				for(let idx=0; idx<bot_res_len; idx++){
 					var curr_img = document.createElement("img");
 					curr_img.src="http://s3.amazonaws.com/photobalti/"+bot_res[idx];
@@ -136,6 +143,8 @@
 		console.log(selected_files);
 		var num_files = selected_files.length;
 		var inp_labels = document.getElementById('inp_labels').value;
+		var upload_stat=document.getElementById('upload_status');
+		var hidden_flag = upload_stat.getAttribute("hidden");
 		if(num_files>0){
 			var my_file_reader = new FileReader();
 			var curr_file = selected_files[0];
@@ -171,9 +180,20 @@
 					console.log(res);
 				});
 			}
+			
+			upload_stat.innerHTML = "Upload Status: Successful";
+			hidden_flag = upload_stat.getAttribute("hidden");
+			if(hidden_flag){
+				upload_stat.removeAttribute("hidden");
+			}
 		}
 		else{
 			console.log("No image selected")
+			upload_stat.innerHTML = "Upload Status: Unsuccessful";
+			hidden_flag = upload_stat.getAttribute("hidden");
+			if(hidden_flag){
+				upload_stat.removeAttribute("hidden");
+			}
 		}
 		document.getElementById("uploaded_img").value="";
 		document.getElementById('inp_labels').value = "";
