@@ -78,8 +78,8 @@
 	
 		var curr_query = document.getElementById('my_search_query').value;
 		// var body = JSON.stringify({"curr_query":curr_query})
-		// { apiKey: "uaFGag3FPM7ny6BFIzc3M7rSBxYWPTBd7uUaQE4k" }
-		var myapigClient = apigClientFactory.newClient({ apiKey: "uaFGag3FPM7ny6BFIzc3M7rSBxYWPTBd7uUaQE4k" });
+		// { apiKey: "VIHvS7pgBe7ujCxq4G9oMaHFm8uFqJxb4zUb6ddr" }
+		var myapigClient = apigClientFactory.newClient({ apiKey: "VIHvS7pgBe7ujCxq4G9oMaHFm8uFqJxb4zUb6ddr" });
 		var params = {q:curr_query};
 		console.log(params);
 		myapigClient.searchGet(params,{},{}).then(function(res)
@@ -174,8 +174,8 @@
 				// }
 
 				// console.log(encoded);
-				// { apiKey: "uaFGag3FPM7ny6BFIzc3M7rSBxYWPTBd7uUaQE4k" }
-				var myapigClient = apigClientFactory.newClient({ apiKey: "uaFGag3FPM7ny6BFIzc3M7rSBxYWPTBd7uUaQE4k" });
+				// { apiKey: "VIHvS7pgBe7ujCxq4G9oMaHFm8uFqJxb4zUb6ddr" }
+				var myapigClient = apigClientFactory.newClient({ apiKey: "VIHvS7pgBe7ujCxq4G9oMaHFm8uFqJxb4zUb6ddr" });
 				myapigClient.uploadBucketKeyPut(params,body,{}).then(function(res){
 					console.log(res);
 				});
