@@ -60,13 +60,13 @@ def lambda_handler(event, context):
 
     results = set()
     for k in keys:
-
         q = {'size': 100, 'query': {'multi_match': {'query': k}}}
         res = client.search(index=INDEX, body=q)
         hits = res['hits']['hits']
         for hit in hits:
             results.add(hit['_source']['objectKey'])
-
+            
+    print(results)
     return {
         'statusCode': 200,
         'headers': {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "*", "Access-Control-Allow-Headers": "*"},
