@@ -16,6 +16,7 @@ def get_awsauth(region, service):
 
 
 def lambda_handler(event, context):
+    print("get rekt")
     print((event))
     print(event['queryStringParameters']['q'])
 
